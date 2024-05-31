@@ -1,0 +1,666 @@
+@mixin mediaQuery($args...){
+    @if length($args)==1{
+        @media screen and (max-width: nth($args, 1)){
+            @content;
+        }
+    }
+    
+    @if length($args)==2{
+        @media screen and (max-width: nth($args, 1)) and (min-width: nth($args, 2)){
+            @content;
+        }
+    }
+}
+
+// hero section mobile and tablet
+@mixin hero-section-mobl{
+    flex-direction: column-reverse;
+    height: 950px;
+    align-items: center;
+    margin-top: 90px;
+    padding-inline: $margin-mobl;
+
+    .leftSide{
+        width: 100%;
+        height: 50%;
+        
+        .heroTxt{
+
+            h1{
+                font-size: 35px;
+                font-weight: 700;
+                width: 350px;
+            }
+
+            ul{
+                gap: 40px;
+
+                li{
+
+                    line-height: 25px;
+                }
+            }
+        }
+
+        .CTA{
+            width: 100%;
+            height: auto;
+        }
+    }
+
+    .rightSide{
+        width: 100%;
+        height: 50%;
+
+        .heroImg{
+            width: 350px;
+            height: 350px;
+        }
+    }
+}
+
+@mixin hero-section-tab{
+    padding-inline: $margin-mobl;
+    flex-direction: column-reverse;
+    height: 900px;
+
+    .leftSide{
+        width: 100%;
+        align-items: center;
+        
+        .heroTxt{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            h1{
+                font-size: 35px;
+                font-weight: 700;
+                width: 850px;
+                text-align: center;
+            }
+
+            p{
+                text-align: center;
+            }
+
+            ul{
+                width: 500px;
+                gap: 40px;
+
+                li{
+
+                    line-height: 25px;
+                }
+            }
+        }
+
+        .CTA{
+            width: auto;
+            height: auto;
+        }
+    }
+
+    .rightSide{
+        width: 100%;
+
+        .heroImg{
+            width: 350px;
+            height: 350px;
+        }
+    }
+}
+
+@mixin pro-profiles-mobl{
+    padding-inline: $margin-mobl;
+    height: 600px;
+    gap: 15px;
+    margin-top: 60px;
+
+    >p{
+        margin-bottom: 40px;
+    }
+
+    .profiles-carousel{
+        // height: 330px;
+        margin-top: 65px;
+
+        .profile-card{
+            @include profile-cards-mobl();
+        }
+    }
+
+    >button{
+        margin-top: 90px;
+    }
+}
+
+@mixin profile-cards-mobl{
+    width: auto;
+    height: auto;
+
+    .profileImg{
+        width: 100px;
+        height: 100px;
+    }
+
+    .profile-cardtxt{
+        grid-gap: 25px;
+
+        h4{
+            margin-bottom: 8px;
+        }
+
+        .cardButtons{
+            height: auto;
+
+            button{
+                font-size: none;
+                padding: none;
+                margin-top: -1px;
+            }
+        }
+    }
+}
+
+@mixin events-section-mobl{
+    padding-inline: $margin-mobl;
+    height: 350px;
+    margin-top: 40px;
+
+    h2{
+        margin-bottom: 15px;
+    }
+
+    .eventCarousel{
+        // grid-gap: 20px;
+
+        .eventCard{
+            width: auto;
+        }
+    }
+}
+
+@mixin feature-mobl{
+    padding-inline: $margin-mobl;
+    height: auto;
+    margin-top: 40px;
+
+    h2{
+        margin-bottom: 15px;
+    }
+
+    .gposts{
+
+        .crusl{
+
+            .post{
+                gap: 15px;
+                align-items: center;
+                justify-content: center;
+                
+                .eventCard{
+                    width: 300px;
+                    height: 200px;
+                }
+            }
+        }
+    }
+} 
+
+// categories mobile and tablet
+@mixin categories-mobl{
+    padding-inline: $margin-mobl;
+    height: 2500px;
+
+    >p{
+        width: 300px;
+    }
+
+    .cateGrid{
+        grid-template-columns: 1fr;
+        place-items: center;
+    }
+}
+
+@mixin categories-tab{
+    padding-inline: $margin-mobl;
+    height: 1300px;
+
+    .cateGrid{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+// trust for mobile and tablet
+@mixin trust-mobl{
+    padding-inline: $margin-mobl;
+    height: 250px;
+    
+    .companys{
+        gap: 30px;
+
+        .linkedin,
+        .meta,
+        .apple,
+        .microsoft{
+            font-size: 35px;
+            color: $backgroundColor-v;
+
+            p{
+                font-size: 16px;
+                margin-top: 15px;
+            }
+        }
+    }
+
+    svg{
+        left: 15px;
+    }
+}
+
+@mixin trust-tab{
+    padding-inline: $margin-mobl;
+    height: 250px;
+    
+    .companys{
+        gap: 60px;
+
+        .linkedin,
+        .meta,
+        .apple,
+        .microsoft{
+            font-size: 35px;
+            color: $backgroundColor-v;
+
+            p{
+                font-size: 16px;
+                margin-top: 15px;
+            }
+        }
+    }
+
+    svg{
+        left: 15px;
+    }
+}
+
+// about us media query for mobileand tablet
+@mixin aboutUs-mobl{
+    padding-inline: $margin-mobl;
+    height: 2950px;
+
+    .desc{
+        flex-direction: column;
+        gap: 50px;
+
+        .descImg{
+            height: 50%;
+            width: 100%;
+
+            .cripimg{
+                width: 350px;
+                height: 350px;
+            }
+        }
+
+        .descTxt{
+            height: 50%;
+            width: 100%;
+
+            p{
+                width: 350px;
+            }
+        }
+    }
+
+    .MishVish{
+        flex-direction: column;
+        gap: 30px;
+
+        .ourMish{
+            flex: 0;
+            width: 350px;
+
+            h3{
+                margin-bottom: 20px;
+            }
+
+            p{
+                width: 350px;
+            }
+        }
+
+        .ourVish{
+            flex: 0;
+            width: 350px;
+            padding-left: 0px;
+            border: none;
+
+            h3{
+                margin-bottom: 20px;
+            }
+
+            p{
+                width: 350px;
+            }
+        }
+    }
+
+    .teamCards{
+        flex-direction: column;
+    }
+}
+
+@mixin aboutUs-tab{
+    padding-inline: $margin-mobl;
+    height: 1730px;
+
+    .desc{
+        gap: 50px;
+
+        .descImg{
+            height: 50%;
+            width: 100%;
+
+            .cripimg{
+                width: 350px;
+                height: 350px;
+            }
+        }
+
+        .descTxt{
+            height: 50%;
+            width: 100%;
+
+            p{
+                width: 350px;
+            }
+        }
+    }
+}
+
+// get intouch media query for mobile and tablet
+@mixin getinTouch-mobl{
+    padding-inline: $margin-mobl;
+    flex-direction: column;
+    height: 950px;
+    margin-top: 70px;
+
+    h2{
+        top: 0;
+        left: 30%;
+    }
+
+    .touchImg{
+        height: 50%;
+        width: 100%;
+
+        .Tchimg{
+            width: 350px;
+            height: 350px;
+        }
+    }
+
+    form{
+        width: 100%;
+        height: 50%;
+    }
+}
+
+@mixin getinTouch-tab{
+    padding-inline: $margin-mobl;
+    height: 450px;
+    margin-top: 70px;
+    
+
+    h2{
+        top: 0;
+        left: 38%;
+        margin-bottom: 2px;
+    }
+
+    .touchImg{
+
+        .Tchimg{
+            width: 350px;
+            height: 350px;
+        }
+    }
+
+    form{
+        width: 100%;
+        height: auto;
+    }
+}
+
+// media query for footer mobile and tablet
+@mixin footer-mobl{
+
+    .foot{
+        width: 350px;
+
+        .btmlogo{
+            width: 100px;
+            height: 100px;
+        }
+    }
+
+    .links{
+        width: 320px;
+
+        i{
+            font-size: 25px;
+            font-weight: 500;
+        }
+    }
+}
+
+@mixin footer-tab{
+    padding-inline: $margin-mobl;
+    margin-top: 50px;
+
+    .foot{
+        width: 750px;
+
+        .btmlogo{
+            width: 100px;
+            height: 100px;
+        }
+    }
+
+    .links{
+        width: 320px;
+
+        i{
+            font-size: 25px;
+            font-weight: 500;
+        }
+    }
+}
+
+// Media query for the hiring page
+@mixin hero-hire-mobl{
+    width: 100%;
+    height: 50%;
+
+    form{
+        margin-left: 0px;
+    }
+}
+
+@mixin hero-hire-tab{
+    width: auto;
+
+    form{
+        margin-left: 0px;
+    }
+}
+
+// sign in 
+@mixin signin-tab{
+    padding-inline: $margin-mobl;
+    height: 530px;
+
+    .signInimg{
+        display: grid;
+
+
+        .opts{
+            display: grid;
+            place-items: center;
+            top: 7%;
+
+            .opt{
+                width: 300px;
+            }
+        }
+    }
+
+    .loginarea{
+
+        .log{
+
+            .user{
+
+                input{
+                    width: 350px;
+                }
+
+                .check{
+                    width: 350px;
+                }
+
+                a{
+
+                    button{
+                        padding-inline: 150px;
+                    }
+                }
+            }
+        }
+    }
+}
+@mixin signin-mobl{
+    padding-inline: $margin-mobl;
+    flex-direction: column;
+    height: auto;
+
+    .signInimg{
+        display: grid;
+        width: 100%;
+
+
+        .opts{
+            display: grid;
+            place-items: center;
+            top: 7%;
+            position: static;
+
+            .opt{
+                width: 300px;
+            }
+        }
+    }
+
+    .loginarea{
+        width: 100vw;
+        height: auto;
+        padding-bottom: 50px;
+        margin-top: 60px;
+
+        .log{
+
+            .user{
+
+                select{
+                    width: 350px;
+                    font-size: 16px;
+
+                    option{
+                        font-size: 12px;
+                        font-weight: 200;
+                    }
+                }
+
+                input{
+                    width: 350px;
+                }
+
+                .check{
+                    width: 350px;
+                }
+
+                a{
+
+                    button{
+                        padding-inline: 150px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// consult page
+@mixin consult-mobl{
+
+    
+}
+
+// community page
+@mixin devs-comm-mobl{
+    padding-inline: $margin-mobl;
+
+    .dev-wrap{
+
+        .dev-cards{
+            grid-template-columns: repeat(1, 1fr);
+            grid-gap: 30px;
+        }
+    }
+}
+@mixin devs-comm-tab{
+    padding-inline: $margin-mobl;
+
+    .dev-wrap{
+
+        .dev-cards{
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+}
+
+// profess page
+@mixin data-eng-tab{
+    padding-inline: $margin-mobl;
+
+    .allcap{
+
+        .profiles-carousels{
+            grid-template-columns: repeat(2, 1fr);
+            width: auto;
+        }
+    }
+}
+@mixin data-eng-mobl{
+    padding-inline: $margin-mobl;
+    margin-top: 40px;
+
+    .allcap{
+
+        .profiles-carousels{
+            grid-template-columns: repeat(1, 1fr);
+            width: auto;
+        }
+    }
+}
+
+@mixin search-mobl{
+    padding-inline: $margin-mobl;
+
+    .searchbar{
+        width: 100%;
+    }
+}

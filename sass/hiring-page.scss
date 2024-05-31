@@ -1,0 +1,143 @@
+@import "./variables";
+@import"./mediaQuery";
+@import "./mixins";
+@import "./mixin-hire";
+
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: sans-serif;
+}
+
+:root{
+    scroll-behavior: smooth;
+}
+
+body{
+    scroll-behavior: smooth;  
+    background-color: $backgroundColor;
+
+    // mobile media query
+    @include mediaQuery(767px){
+        overflow-x: hidden;
+    }
+
+    @include mediaQuery(1024px, 768px){
+        overflow-x: hidden;
+    }
+}
+
+.hero{
+    margin-bottom: 90px;
+    // background-color: aqua;
+    position: relative;
+    height: 750px;
+    justify-content: center;
+    align-items: center;
+
+    // mobile media query
+    @include mediaQuery(767px){
+        padding-inline: $margin-mobl;
+        display: flex;
+        flex-direction: column;
+        height: 1150px;
+        margin-top: 90px;
+        width: 100%;
+    }
+
+    
+    @include mediaQuery(1024px, 768px){
+        padding-inline: $margin-mobl;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        height: 600px;
+        margin-top: 90px;
+        width: 100%;
+        margin-bottom: 30px;
+
+        >h2{
+            margin-left: 135px;
+        }
+    }
+
+    .form1{
+        @include hero-hire;
+        display: block;
+
+        // mobile media query
+        @include mediaQuery(767px){
+            @include hero-hire-mobl;
+        }
+
+        @include mediaQuery(1024px, 768px){
+            @include hero-hire-tab;
+        }
+    }
+
+    .form2{
+        @include hero-hire;
+        display: none;
+
+        // mobile media query
+        @include mediaQuery(767px){
+            @include hero-hire-mobl;
+        }
+
+        @include mediaQuery(1024px, 768px){
+            @include hero-hire-tab;
+        }
+    }
+
+    .form3{
+        height: 300px;
+        // background-color: aqua;
+        @include hero-hire;
+        margin-left: 30px;
+        display: none;
+
+        // mobile media query
+        @include mediaQuery(767px){
+            @include hero-hire-mobl;
+            margin-left: 10px;
+        }
+
+        @include mediaQuery(1024px, 768px){
+            @include hero-hire-tab;
+        }
+
+        form{
+            margin-left: 130px;
+            // background-color: aqua;
+            padding-inline: 0px;
+
+            input{
+                @include inputs;
+                width: 350px;
+                margin-top: 2px;
+            }
+
+            // mobile media query
+            @include mediaQuery(767px){
+                margin-left: 0px;
+            }
+        }
+    }
+
+    button{
+        @include filled-button;
+        position: absolute;
+        bottom: 20%;
+        right: 23%;
+        padding-inline: 90px;
+
+        // mobile media query
+        @include mediaQuery(767px){
+            bottom: 0;
+        }
+
+        @include mediaQuery(1024px, 768px){
+            right: 10%;
+        }
+    }
+}

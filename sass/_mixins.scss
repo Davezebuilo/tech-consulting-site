@@ -1,0 +1,1571 @@
+@import "./variables";
+@import"./mediaQuery";
+@import "./mixin-profess";
+
+// Navbar design
+
+// laptop navbar
+@mixin laptop-navbar{
+    width: 100%;
+    height: 80px;
+    background-color: $backgroundColor;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-inline: $Margin;
+    position: fixed;
+    top: 0;
+    z-index: 50;
+    border-bottom: 0.5px solid rgba(182, 182, 182, 0.085);
+    // display: none;
+
+    a{
+        text-decoration: none;
+        color: none;
+    }
+
+    .hamburger{
+        display: none;
+    }
+
+    .logo{
+        
+        .logoImg{
+            width: 90px;
+            height: 40px;
+
+            img{
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+        }
+    }
+
+    ul{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        list-style: none;
+        gap: 45px;
+
+        li{
+            font-size: 14px;
+            font-weight: 700;
+            color: $PrimaryColor;
+            letter-spacing: 1px;
+            position: relative;
+            list-style: none;
+
+            a{
+                color: $PrimaryColor;
+
+                &:hover{
+                    color: $whiteColor;
+                }
+            }
+
+            &::before{
+                position: absolute;
+                content: "";
+                width: 0%;
+                height: 3px;
+                background-color: $PrimaryColor;
+                bottom: -10%;
+                transition: 400ms ease;
+            }
+
+            &:hover{
+
+                &::before{
+                    width: 100%;
+                }
+            }
+
+            &::after{
+                position: absolute;
+                content: "";
+                width: 0%;
+                height: 2px;
+                background-color: $SecondaryColor;
+                bottom: -15%;
+                right: 0;
+                transition: 400ms ease;
+            }
+
+            &:hover{
+
+                &::after{
+                    width: 100%;
+                }
+            }
+
+            &:nth-of-type(4){
+                color: $SecondaryColor;
+
+                a{
+                    color: $SecondaryColor;
+
+                    &:hover{
+                        color: $whiteColor;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// mobile navbar
+@mixin mobile-navbar{
+    display: flex;
+    padding-inline: 15px;
+    height: 65px;
+    z-index: 55;
+    justify-content: space-between;
+
+    .logo{
+        display: block;
+        font-size: 20px;
+        font-weight: 700;
+    }
+
+    .hamburger{
+        display: block;
+        transition: 200ms;
+        // display: none;
+        cursor: pointer;
+
+        i{
+            font-size: 30px;
+            color: $PrimaryColor;
+
+            &:hover{
+                color: $SecondaryColor;
+                cursor: pointer;
+            }
+        }
+    }
+
+    a, 
+    ul{
+        display: none;
+
+        button{
+        display: none;
+        }
+    }
+
+    .button-wrap{
+        display: none;
+    }
+}
+
+// the navigation menu that pops out for mobile
+@mixin for-pop-out{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    z-index: 60;
+    display: block;
+    transition: 300ms ease-in-out;
+
+    .showing{
+        width: 100%;
+        height: 90px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-inline: 40px;
+        display: none;
+        
+
+        .logocnt{
+
+            .logo{
+                display: none;
+            }
+        }
+    }
+
+    .pop-out{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 80px;
+        position: absolute;
+        right: 0;
+        background-color: $backgroundColor;
+
+        .hamburger{
+            transition: 200ms;
+            cursor: pointer;
+
+            i{
+                font-size: 35px;
+                color: $PrimaryColor;
+
+                &:hover{
+                    color: $SecondaryColor;
+                    cursor: pointer;
+                }
+            }
+        }
+
+        ul{
+            list-style: none;
+            display: grid;
+            gap: 30px;
+            text-align: center;
+
+            li{
+                font-size: 16px;
+                font-weight: 700;
+                color: $PrimaryColor;
+                position: relative;
+                list-style: none;
+    
+                a{
+                    color: $PrimaryColor;
+                    text-decoration: none;
+    
+                    &:hover{
+                        color: $SecondaryColor;
+                    }
+                }
+            }
+        }
+    
+        .button-wrap{
+            display: grid;
+            place-items: center;
+            width: 100%;
+            height: 150px;
+
+            a{
+    
+                &:nth-of-type(2){
+                    button{
+                        @include filled-button;                
+                    }
+                }
+            }
+        
+            a{
+                
+                &:first-of-type{
+                    button{
+                        @include border-button;          
+                    }
+                }
+            }
+        }
+    }
+}
+// Nav bar ends here
+
+
+// buttons
+
+// bordered buttons
+@mixin border-button{
+    padding: 12px 30px;
+    font-size: 16px;
+    background: none;
+    outline: none;
+    border: 1px solid $PrimaryColor;
+    border-radius: 5px;
+    color: $PrimaryColor;
+    transition: 300ms;
+
+    &:hover{
+        cursor: pointer;
+        background-color: $PrimaryColor-v;
+        background-color: rgba(1, 171, 239, 0.3);
+        transform: scale(1.05);
+    }
+}
+
+// Filled buttons
+@mixin filled-button{
+
+    padding: 12px 30px;
+    background-color: $PrimaryColor;
+    font-size: 16px;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    color: $whiteColor;
+    transition: 300ms;
+
+    &:hover{
+        cursor: pointer;
+        background-color: $SecondaryColor;
+        transform: scale(1.05);
+    }
+}
+
+// hero section on landing page
+@mixin hero-section{
+    width: 100%;
+    height: 600px;
+    padding-inline: $Margin;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 110px;
+
+    h2{
+        color: $PrimaryColor;
+        font-size: 30px;
+        font-weight: 600;
+        margin-bottom: 40px;
+        text-transform: capitalize;
+        text-align: center;
+        position: absolute;
+        top: 0;
+
+        span{
+            color: $SecondaryColor;
+        }
+    }
+
+    .leftSide{
+        width: 50%;
+        height: 100%;
+        // background-color: brown;
+        display: flex;
+        gap: 60px;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+
+        .heroTxt{
+
+            h1{
+                font-size: 50px;
+                font-weight: 700;
+                width: 650px;
+                color: $PrimaryColor;
+                margin-bottom: 40px;
+
+                span{
+                    color: $SecondaryColor;
+                }
+            }
+
+            p{
+
+                color: $backgroundColor-v;
+                font-size: 18px;
+                font-weight: 100;
+                margin-bottom: 30px;
+
+                span{
+                    color: $PrimaryColor;
+                }
+            }
+
+            ul{
+                display: grid;
+                gap: 30px;
+                list-style: none;
+                // list-style-image: url(../img/checkbox-circle-fill.png);
+
+                li{
+                    height: 20px;
+                    color: $whiteColor;
+                    font-size: 14px;
+                    font-weight: 100;
+
+                    span{
+                        color: $SecondaryColor;
+                    }
+
+                    i{
+                        font-size: 16px;
+                        color: $SecondaryColor;
+                        margin-right: 10px;
+                    }
+                }
+            }
+        }
+
+        .CTA{
+            display: flex;
+            gap: 20px;
+
+            a{
+                text-decoration: none;
+
+                button{
+                    @include filled-button();
+                }
+
+                &:nth-of-type(2){
+                    button{
+                        @include border-button();
+                    }
+                }
+            }
+        }
+    }
+
+    .rightSide{
+        width: 50%;
+        height: 100%;
+        // background-color: aqua;
+        display: grid;
+        place-items: center;
+
+        .heroImg{
+            width: 550px;
+            height: 550px;
+
+            img{
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+    }
+
+    .shadow1{
+        @include for-shadow1();
+    }
+}
+
+// shadows
+// This is the shadow in the hero section
+@mixin for-shadow1{
+    width: 600px;
+    height: 400px;
+    background-color: $shadowSetting;
+    position: fixed;
+    z-index: -1;
+    right: 3%;
+    bottom: -10%;
+    filter: blur(184px);
+}
+
+// This is the shadow in the events section
+@mixin for-shadow2{
+    width: 400px;
+    height: 250px;
+    background-color: $shadowSetting2;
+    position: absolute;
+    z-index: -1;
+    left: 0;
+    bottom: -40%;
+    filter: blur(184px);
+}
+
+// This is the shadow in the pro-profile section
+@mixin for-shadow3{
+    width: 400px;
+    height: 250px;
+    background-color: green;
+    position: absolute;
+    z-index: -1;
+    left: 0;
+    bottom: -40%;
+    filter: blur(184px);
+}
+
+// animation for the text in events "reusable"
+@mixin text-animation{
+    animation-duration: 500ms;
+    animation-timing-function: ease;
+    animation-name: Text;
+    animation-iteration-count: infinite;
+    animation-direction: normal;
+    
+    @keyframes Text {
+        0%{
+            color: $PrimaryColor;
+        }
+        50%{
+            color: $SecondaryColor;
+        }
+        100%{
+            color: $Gradient;
+        }        
+    }
+}
+
+// The events section
+@mixin events-section{
+    // margin-top: 70px;
+    width: 100%;
+    height: 400px;
+    // background-color: $backgroundColor-alt;
+    padding-inline: $Margin;
+    position: relative;
+
+    h2{
+        color: $PrimaryColor;
+        font-size: 30px;
+        font-weight: 600;
+        margin-bottom: 40px;
+        text-transform: capitalize;
+        text-align: center;
+
+        span{
+            color: $SecondaryColor;
+        }
+    }
+
+    .eventCarousel{
+        // padding-inline: 10px;
+        // width: 100%;
+        // height: 300px;
+        // background-color: aqua;
+        // display: grid;
+        // place-items: center;
+        // grid-gap: 30px;
+        // grid-template-columns: repeat(6, 1fr);
+        // overflow: hidden;
+
+        // &::-webkit-scrollbar{
+        //     display: none;
+        // }
+
+        .eventCard{
+            width: auto;
+            height: 250px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            transition: 300ms ease;
+
+            &:hover{
+                transform: scale(0.98);
+                border: 2px solid $SecondaryColor;
+                box-shadow: 0 3px 15px rgba(0, 0, 0, 0.329);
+                cursor: pointer;
+
+                .cardimg{
+
+                    img{
+                        transform: scale(1.03);
+                    }
+                }
+
+                .eventcardTxt{
+                    background-color: rgba(30, 29, 29, 0.33);
+                }
+            }
+
+            .cardimg{
+                width: 100%;
+                height: 100%;
+                position: relative;
+
+                img{
+                    object-fit: cover;
+                    width: 100%;
+                    height: 100%;
+                    position: relative;
+                    transition: 300ms;
+                }
+            }
+
+            .eventcardTxt{
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                border-radius: 10px;
+                background-image: linear-gradient(to top right, rgba(0, 0, 0, 0.755), rgba(0, 0, 0, 0));
+                top: 0;
+                padding: 10px 20px;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                
+
+                h1{
+                    color: $PrimaryColor;
+                    font-size: 25px;
+                    font-weight: 700;
+                    width: 150px;
+                    margin-bottom: 5px;
+
+                    span{
+                        color: $SecondaryColor;
+                    }
+                }
+
+                >span{
+                    font-size: 20px;
+                    font-weight: 500;
+                    color: $PrimaryColor;
+
+                    i{
+                        color: rgb(192, 29, 29);
+                    }
+                }
+
+                p{
+                    color: $PrimaryColor;
+                    margin-top: 5px;
+
+                    i{
+                        color: $SecondaryColor;
+                    }
+                }
+            }
+        }
+    }
+
+    .shadow2{
+        @include for-shadow2();
+    }
+}
+
+// pro-profiles
+@mixin pro-profiles{
+    width: 100%;
+    height: 650px;
+    margin-top: 90px;
+    position: relative;
+    padding-inline: $Margin;
+    display: grid;
+    place-items: center;
+    margin-bottom: 100px;
+    // background-color: aqua;
+
+    
+    button{
+        @include border-button();
+        margin-top: 40px;
+    }
+
+    h2{
+        color: $PrimaryColor;
+        font-size: 30px;
+        font-weight: 600;
+        margin-bottom: 40px;
+        text-transform: capitalize;
+        text-align: center;
+
+        span{
+            color: $SecondaryColor;
+        }
+    }
+
+    p{
+        color: $PrimaryColor;
+        width: 300px;
+        font-size: 16px;
+        font-weight: 100;
+        text-align: center;
+        line-height: 25px;
+        margin-top: -35px;
+    }
+    
+    // carousel for the profiles on the landing
+    .profiles-carousel{
+        // display: grid;
+        // place-items: center;
+        // grid-gap: 30px;
+        // grid-template-columns: repeat(6, 1fr);
+        // width: 100%;
+        // height: 430px;
+        overflow: hidden;
+        margin-top: 30px;
+        // background-color: brown;
+        // padding-inline: 10px;
+
+        // &::-webkit-scrollbar{
+        //     display: none;
+        // }
+
+        .profile-card{
+            @include profile-cards();
+        }
+    }
+}
+
+// profile card
+@mixin profile-cards{
+    width: auto;
+    height: 400px;
+    border: 1px solid $backgroundColor-alt;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    gap: 30px;
+    transition: 300ms ease;
+    padding: 15px 90px;
+
+    &:hover{
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.197);
+        border: 1px solid $SecondaryColor;
+        transform: scale(0.95);
+        cursor: pointer;
+    }
+
+    .profileImg{
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        overflow: hidden;
+
+        img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+    
+    .profile-cardtxt{
+        display: grid;
+        place-items: center;
+        grid-gap: 30px;
+
+        h4{
+            font-weight: 200;
+            font-size: 20px;
+            color: $PrimaryColor;
+
+            span{
+                color: $SecondaryColor;
+                font-weight: 500;
+            }
+        }
+
+        p{
+            font-size: 14px;
+            color: $backgroundColor-v;
+        }
+
+        .cardButtons{
+            display: flex;
+            align-items: center;
+            gap: 20px;
+
+            button{
+
+                @include filled-button();
+                font-size: 14px;
+                padding: 10px 20px;
+
+                &:nth-of-type(2){
+                    
+                    button{
+
+                        @include border-button();
+                        font-size: 14px;
+                        padding: 10px 20px;
+                    
+                    }
+                }
+            }
+
+            >a{
+                text-decoration: none;
+
+                button{
+
+                    @include filled-button();
+                    font-size: 14px;
+                    padding: 10px 20px;
+                }
+
+                &:nth-of-type(2){
+                    
+                    button{
+
+                        @include border-button();
+                        font-size: 14px;
+                        padding: 10px 20px;
+                    
+                    }
+                }
+            }
+        }
+    }
+}
+
+// categories section
+@mixin categories{
+    width: 100%;
+    height: 1000px;
+    padding-inline: $Margin;
+    margin-top: 40px;
+    // background-color: aqua;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h2{
+        color: $PrimaryColor;
+        font-size: 30px;
+        font-weight: 600;
+        margin-bottom: 40px;
+        text-transform: capitalize;
+        text-align: center;
+
+        span{
+            color: $SecondaryColor;
+        }
+    }
+
+    >p{
+        color: $PrimaryColor;
+        width: 400px;
+        font-size: 16px;
+        font-weight: 100;
+        text-align: center;
+        line-height: 25px;
+
+        span{
+            color: $SecondaryColor;
+            font-weight: 700;
+        }
+    }
+
+    .cateGrid{
+        width: 100%;
+        height: auto;
+        margin-top: 70px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        // background-color: brown;
+
+        .gridCard{
+            width: auto;
+            height: 350px;
+            // background-color: aqua;
+            padding: 30px 15px;
+            display: grid;
+            border-radius: 10px;
+            border: 1px solid $backgroundColor-v;
+            transition: 300ms;
+
+            &:hover{
+                transform: scale(0.95);
+                border: 1px solid $SecondaryColor;
+
+                >i{
+                    color: $SecondaryColor;
+                }
+
+                h3{
+                    color: $SecondaryColor;
+                }
+
+                p{
+                    color: $SecondaryColor;
+                }
+
+                >span{
+
+                    a{
+                        display: block;
+                    }
+
+                    i{
+                        display: block;
+                    }
+                }
+            }
+
+            >i{
+                font-size: 60px;
+                color: $backgroundColor-v;
+            }
+
+            h3{
+                color: $backgroundColor-v;
+                font-size: 25px;
+                font-weight: 500;
+                // margin-top: 30px;
+            }
+
+            p{
+                line-height: 25px;
+                font-size: 16px;
+                font-weight: 300;
+                color: $backgroundColor-v;
+                // margin-top: 30px;
+                width: 300px;
+            }
+
+            >span{
+                width: 100%;
+                height: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 230px;
+
+                a{
+                    text-decoration: none;
+                    font-size: 14px;
+                    color: $PrimaryColor;
+                    display: none;
+                    transition: 500ms;
+                }
+
+                i{
+                    font-size: 14px;
+                    color: $PrimaryColor;
+                    display: none;
+                    transition: 300ms;
+                }
+            }
+        }
+    }
+}
+
+// trust section
+@mixin trust{
+    width: 100%;
+    height: 300px;
+    background-color: #0e2a5442;
+    padding-inline: $Margin;
+    display: grid;
+    place-items: center;
+    margin-bottom: 50px;
+    position: relative;
+
+    
+    h2{
+        color: $PrimaryColor;
+        font-size: 30px;
+        font-weight: 600;
+        margin-bottom: 40px;
+        text-align: center;
+        text-transform: capitalize;
+        width: 250px;
+
+        span{
+            color: $SecondaryColor;
+        }
+    }
+
+    .companys{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 200px;
+        margin-top: -30px;
+
+        .linkedin,
+        .meta,
+        .apple,
+        .microsoft{
+            font-size: 50px;
+            color: $backgroundColor-v;
+            display: grid;
+            place-items: center;
+
+            p{
+                font-size: 20px;
+                margin-top: 20px;
+            }
+        }
+    }
+
+    svg{
+        position: absolute;
+        z-index: -1;
+        left: 15%;
+        opacity: 0.1;
+    }
+}
+
+// About us
+@mixin aboutUs{
+    width: 100%;
+    height: 1600px;
+    padding-inline: $Margin;
+    margin-top: 70px;
+
+    h2{
+        color: $PrimaryColor;
+        font-size: 30px;
+        font-weight: 600;
+        margin-bottom: 40px;
+        text-transform: capitalize;
+        text-align: center;
+
+        span{
+            color: $SecondaryColor;
+        }
+
+        &:nth-of-type(2){
+            margin-top: 100px;
+        }
+    }
+
+    .desc{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 70px;
+
+        .descImg{
+            width: 50%;
+            display: grid;
+            place-items: center;
+
+            .cripimg{
+                width: 450px;
+                height: 450px;
+    
+                img{
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+        }
+
+        .descTxt{
+            display: grid;
+            place-items: center;
+            width: 50%;
+            p{
+                color: $backgroundColor-v;
+                font-size: 16px;
+                line-height: 25px;
+                width: 500px;
+
+                span{
+                    color: $SecondaryColor;
+                }
+
+            }
+        }
+    }
+
+    .MishVish{
+        width: 100%;
+        height: auto;
+        padding-block: 20px;
+        // background-color: aqua;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 60px;
+
+        .ourMish{
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            // align-items: center;
+            justify-content: center;
+            width: auto;
+
+            h3{
+                color: $PrimaryColor;
+                font-size: 25px;
+                font-weight: 700;
+                margin-bottom: 30px;
+            }
+
+            p{
+                color: $backgroundColor-v;
+                width: 100%;
+                line-height: 25px;
+                font-size: 16px;
+                text-align: left;
+
+                span{
+                    color: $SecondaryColor;
+                }
+            }
+        }
+
+        .ourVish{
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            // align-items: flex-end;
+            // padding-left: 140px;
+            justify-content: center;
+            // border-left: 1px solid $backgroundColor-alt;
+            width: auto;
+
+            h3{
+                color: $PrimaryColor;
+                font-size: 25px;
+                font-weight: 700;
+                margin-bottom: 30px;
+            }
+
+            p{
+                color: $backgroundColor-v;
+                font-size: 16px;
+                width: 100%;
+                line-height: 25px;
+                text-align: left;
+
+                span{
+                    color: $SecondaryColor;
+                }
+            }
+        }
+    }
+
+    .teamCards{
+        width: auto;
+        height: auto;
+        padding: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 40px;
+
+        .profile-card{
+        @include grid-cards();
+
+        .profile-cardtxt{
+
+            .cardButtons{
+                button{
+                    @include filled-button();
+                }
+            }
+        }
+        }
+    }
+}
+
+// footer
+@mixin footer{
+    width: 100%;
+    height: 550px;
+    background-image: linear-gradient(to bottom, #092145, #c3297b3c);
+    padding-inline: $Margin;
+    padding-top: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+
+    .foot{
+        width: 1275px;
+        height: 110px;
+        display: grid;
+        place-items: center;
+        position: absolute;
+        bottom: 0;
+        border-top: 1px solid $backgroundColor-v;
+
+        .btmlogo{
+            width: 250px;
+            height: 60px;
+
+            img{
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+        }
+    }
+
+    .links{
+        width: 400px;
+        height: auto;
+        padding: 10px;
+        display: flex;
+        justify-content: space-between;
+        margin-top: 40px;
+
+        i{
+            font-size: 30px;
+            color: $SecondaryColor;
+            font-weight: 400;
+            transition: 500ms;
+
+            &:hover{
+                color: $whiteColor;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .newsLetter{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        h3{
+            color: $SecondaryColor;
+            font-weight: 700;
+            font-size: 30px;
+            text-align: center;
+        }
+    
+        p{
+            color: $backgroundColor-v;
+            font-size: 14px;
+            width: 300px;
+            margin-top: 30px;
+            text-align: center;
+        }
+    
+        input{
+            @include inputs();
+        }
+    }
+
+    button{
+        @include filled-button();
+        margin-top: 20px;
+
+    }
+}
+
+//inputs
+@mixin inputs{
+    padding: 10px;
+    height: 60px;
+    width: 350px;
+    // border-radius: 10px;
+    margin-top: 30px;
+    font-size: 16px;
+    font-weight: 500;
+    outline: none;
+    border: none;
+    color: $backgroundColor-v;
+    border-bottom: 1px solid $backgroundColor-v;
+    // background-color: $backgroundColor-alt;
+    background: none;
+    // box-shadow: 0 0 20px rgba(0, 0, 0, 0.107);
+
+    &::placeholder{
+        color: $backgroundColor-v;
+    }
+
+    &:focus{
+        color: $SecondaryColor;
+        border-bottom: 1px solid $SecondaryColor;
+        font-weight: 500;
+    }
+}
+
+// get in touch
+@mixin getinTouch{
+    width: 100%;
+    height: 750px;
+    display: flex;
+    align-items: center;
+    padding-inline: $Margin;
+    padding-top: 80px;
+    position: relative;
+    // margin-top: 60px;
+    gap: 40px;
+
+    h2{
+        color: $PrimaryColor;
+        font-size: 30px;
+        font-weight: 600;
+        margin-bottom: 40px;
+        text-transform: capitalize;
+        text-align: center;
+        position: absolute;
+        top: 15%;
+        left: 45%;
+
+        span{
+            color: $SecondaryColor;
+        }
+    }
+
+    .touchImg{
+        width: 50%;
+        display: grid;
+        place-items: center;
+
+        .Tchimg{
+            width: 450px;
+            height: 450px;
+
+            img{
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+    }
+
+    form{
+        width: 50%;
+        height: 450px;
+        display: grid;
+        place-items: center;
+
+        .user{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            i{
+                color: $backgroundColor-v;
+                font-size: 65px;
+                font-weight: 500;
+            }
+
+            input{
+                @include inputs();
+            }
+
+            textarea{
+                @include inputs();
+            }
+
+            button{
+                @include filled-button();
+                margin-top: 20px;
+            }
+        }
+    }
+}
+
+// featured posts
+@mixin featured-posts{
+    width: 100%;
+    height: auto;
+    padding-inline: $Margin;
+    display: grid;
+    place-items: center;
+    margin: 40px 0 100px 0;
+
+    h2{
+        color: $PrimaryColor;
+        font-size: 30px;
+        font-weight: 600;
+        margin-bottom: 40px;
+        text-transform: capitalize;
+        text-align: center;
+
+        span{
+            color: $SecondaryColor;
+        }
+    }
+
+    .gposts{
+        width: 100%;
+        height: auto;
+        overflow: scroll;
+
+        &::-webkit-scrollbar{
+            display: none;
+        }
+
+        .crusl{
+            // padding-inline: 10px;
+            // width: auto;
+            // height: auto;
+            // display: grid;
+            // place-items: center;
+            // grid-gap: 40px;
+            // grid-template-columns: repeat(6, 1fr);
+            // transition: ease;
+            // overflow: scroll;
+
+            &::-webkit-scrollbar{
+                display: none;
+            }
+    
+            // &::-webkit-scrollbar-thumb{
+            //     display: block;
+            //     background-color: aqua;
+            // }
+    
+            .post{
+                display: flex;
+                flex-direction: column;
+                gap: 40px;
+
+                .eventCard{
+                    width: 400px;
+                    height: 250px;
+                    position: relative;
+                    overflow: hidden;
+                    border-radius: 10px;
+                    transition: 300ms ease;
+        
+                    &:hover{
+                        transform: scale(0.98);
+                        border: 2px solid $SecondaryColor;
+                        box-shadow: 0 3px 15px rgba(0, 0, 0, 0.329);
+                        cursor: pointer;
+        
+                        .cardimg{
+        
+                            img{
+                                transform: scale(1.03);
+                            }
+                        }
+        
+                        .eventcardTxt{
+                            background-color: rgba(30, 29, 29, 0.33);
+                        }
+                    }
+        
+                    .cardimg{
+                        width: 100%;
+                        height: 100%;
+                        position: relative;
+        
+                        img{
+                            object-fit: contain;
+                            width: 100%;
+                            height: 100%;
+                            position: relative;
+                            transition: 300ms;
+                        }
+                    }
+        
+                    .eventcardTxt{
+                        position: absolute;
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 10px;
+                        background-image: linear-gradient(to top right, rgba(0, 0, 0, 0.755), rgba(0, 0, 0, 0));
+                        top: 0;
+                        padding: 10px 20px;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: flex-end;
+                        
+        
+                        .userpic{
+                            width: 40px;
+                            height: 40px;
+                            border-radius: 50%;
+                            overflow: hidden;
+        
+                            img{
+                                width: 100%;
+                                height: 100%;
+                                object-fit: cover;
+                            }
+                        }
+        
+                        p{
+                            color: $whiteColor;
+                            margin-top: 5px;
+        
+                            &:nth-of-type(2){
+                                color: #8b8b8b;
+                                font-size: 14px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// for the community page
+@mixin devs-comm{
+    width: 100%;
+    height: auto;
+    padding-inline: $Margin;
+    display: grid;
+    place-items: center;
+    margin-top: 40px;
+    margin-bottom: 50px;
+
+    h2{
+        color: $PrimaryColor;
+        font-size: 30px;
+        font-weight: 600;
+        margin-bottom: 40px;
+        text-transform: capitalize;
+        text-align: center;
+
+        span{
+            color: $SecondaryColor;
+        }
+    }
+
+    .dev-wrap{
+        width: auto;
+        height: auto;
+        display: grid;
+        place-items: center;
+
+        .dev-cards{
+            padding-inline: 10px;
+            display: grid;
+            place-items: center;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 40px;
+
+            .dev-card{
+                // background-color: aqua;
+                width: 350px;
+                height: 400;
+                padding: 15px 90px 15px 90px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                border-radius: 20px;
+                gap: 10px;
+                border: 1px solid $backgroundColor-alt;
+                transition: 300ms ease;
+
+                &:hover{
+                    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.197);
+                    transform: scale(0.98);
+                    border: 1px solid $SecondaryColor;
+                    cursor: pointer;
+                }
+
+                .dev-img{
+                    width: 250px;
+                    height: 250px;
+                    overflow: hidden;
+                    margin-bottom: 10px;
+
+                    img{
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
+                }
+
+                .dev-cardTxt{
+                    width: 250px;
+
+                    h3{
+                        color: $SecondaryColor;
+                        font-size: 18px;
+                        margin-bottom: 5px;
+                    }
+
+                    p{
+                        font-size: 14px;
+                        color: $backgroundColor-v;
+                        // margin-bottom: 20px;
+                    }
+                }
+
+                a{
+
+                    button{
+                        @include border-button();
+                        padding-inline: 110px;
+                    }
+                }
+            }
+        }
+    }
+}
